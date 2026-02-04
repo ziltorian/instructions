@@ -1,6 +1,11 @@
 ---
 name: skill-creator
 description: Guide for creating effective, universal Agent Skills that work across multiple AI coding platforms (Claude, GitHub Copilot, Cursor, Windsurf, Aider). Use when creating new skills, updating existing skills, or learning skill creation best practices. Includes specifications, examples, and quality standards.
+license: MIT
+metadata:
+  version: "1.0"
+  category: ai-assistant-configuration
+  author: ziltorian
 ---
 
 # Skill Creator Guide
@@ -180,6 +185,30 @@ Use only if skill has specific requirements:
 compatibility: Python 3.8+ with pandas and numpy packages
 compatibility: Requires git, docker, and internet access
 ```
+
+### license (optional)
+
+License under which the skill is distributed. Use standard SPDX identifiers.
+
+**Recommended licenses:**
+
+- `MIT` - Maximum adoption, permissive
+- `Apache-2.0` - Patent protection
+- `CC0-1.0` - Public domain
+- `Proprietary` - Custom terms (include LICENSE.txt)
+
+**Examples:**
+
+```yaml
+license: MIT
+license: Apache-2.0
+license: Proprietary. See LICENSE.txt for complete terms
+```
+
+**When to use:** Public skills, open-source contributions, community projects  
+**When to omit:** Private repos, internal skills, repo-level license covers all
+
+For detailed guidance, see [License Guide](references/license-guide.md).
 
 ### metadata (optional)
 
@@ -374,6 +403,7 @@ Following the Agent Skills specification ensures compatibility across:
 For detailed information, see the reference files:
 
 - [Agent Skills Specification](references/agent-skills-specification.md) - Complete open standard specification
+- [License Guide](references/license-guide.md) - Choosing and applying licenses to skills
 - [GitHub Copilot Skills Spec](references/github-copilot-skills-spec.md) - GitHub-specific conventions
 - [Example Skills](references/example-skills.md) - Real-world skill examples with analysis
 - [Skills Quick Comparison](references/skills-quick-comparison.md) - Field differences across platforms
@@ -433,6 +463,7 @@ Output: [Expected result]
 For detailed information, see:
 
 - [Agent Skills Specification](references/agent-skills-specification.md) - Complete open standard
+- [License Guide](references/license-guide.md) - Choosing appropriate license
 - [Example Skills](references/example-skills.md) - Real-world examples with analysis
 - [GitHub Copilot Skills Spec](references/github-copilot-skills-spec.md) - GitHub-specific conventions
 - [Skills Quick Comparison](references/skills-quick-comparison.md) - Platform differences
