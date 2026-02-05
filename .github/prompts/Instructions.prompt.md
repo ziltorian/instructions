@@ -12,14 +12,13 @@ agent: agent
 
 1. Загрузить официальную веб документацию по созданию правил агента:
   - Инструкции: `https://code.visualstudio.com/docs/copilot/customization/custom-instructions`
-  - Навыки: `https://code.visualstudio.com/docs/copilot/customization/agent-skills`
   - Файлы запроса: `https://code.visualstudio.com/docs/copilot/customization/prompt-files`
 2. Изучить структуру проекта и определить области, требующие правил.
 3. Собрать техническую информацию и стандарты кодирования, которые должны быть включены.
 
 ### Расположение и расширение файлов
 
-#### Инструции агента
+#### Инструкции агента
 
 - **Директория**: `.github/instructions/`
 - **Расширение**: `{name}.instructions.md` (Markdown)
