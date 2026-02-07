@@ -1,5 +1,5 @@
 ---
-applyTo: '**/*.py'
+# applyTo: '**/*.py'
 name: 'Python_3.13.9_Usage'
 description: 'Использование Python 3.13.9 и обращение к официальной документации'
 ---

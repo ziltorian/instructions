@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Project_Documentation'
 description: 'Минимальные правила ведения документации. Только README и CHANGELOG.'
 ---

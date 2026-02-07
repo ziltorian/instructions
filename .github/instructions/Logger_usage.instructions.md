@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Logger_usage'
 description: 'Руководство по использованию логирования в проекте.'
 ---

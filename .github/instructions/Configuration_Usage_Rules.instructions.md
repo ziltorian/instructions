@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Configuration_Usage_Rules'
 description: 'Обязательное использование конфигурации для всех параметров и переменных модулей'
 ---

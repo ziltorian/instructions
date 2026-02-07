@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Tests_Terminal_Commands'
 description: 'Единая инструкция по запуску pytest в Windows: проверенные команды, настройки и решения всех проблем.'
 ---

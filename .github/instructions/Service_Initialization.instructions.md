@@ -1,5 +1,5 @@
 ---
-applyTo: 'modules/**'
+# applyTo: 'modules/**'
 name: 'Service_Initialization'
 description: 'Правила инициализации сервисов: критичные — через AppServices, редкие — локально.'
 ---

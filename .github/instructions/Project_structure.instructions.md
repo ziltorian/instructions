@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Project_Structure'
 description: 'Архитектура и навигация по проекту'
 ---

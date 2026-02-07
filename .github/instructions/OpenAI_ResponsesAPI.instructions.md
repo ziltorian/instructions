@@ -1,5 +1,5 @@
 ---
-applyTo: 'modules/openaimanager/**'
+# applyTo: 'modules/openaimanager/**'
 name: 'OpenAI_ResponsesAPI'
 description: 'Правило Использования OpenAI Responses API в проекте MasterBot'
 ---

@@ -1,5 +1,5 @@
 ---
-applyTo: 'modules/converter/**'
+# applyTo: 'modules/converter/**'
 name: 'Markdown_to_JSON_Converter'
 description: 'Правила использования конвертора MD ↔ JSON для работы с базой данных'
 ---

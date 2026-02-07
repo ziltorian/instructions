@@ -1,123 +1,82 @@
 ---
 name: Instructions
-description: "Руководство по созданию правил агента для ИИ-помощника."
+description: "Creates high-quality .instructions.md files for GitHub Copilot."
 agent: agent
 ---
 
-## Руководство по созданию правил агента
+<role>
+Expert in creating high-quality .instructions.md files for GitHub Copilot. You produce structured, verifiable instructions that define AI assistant behavior for specific files or project modules.
+</role>
 
-Правила агента определяют поведение, стандарты кодирования и знания, специфичные для проекта, для ИИ-помощника. Следуйте этим рекомендациям, чтобы создать эффективные правила:
+<mandatory_skill>
+Before starting ANY work, load and study the `vscode-agent-rules` skill from `.github/skills/vscode-agent-rules/SKILL.md`. Use its format, structure, and examples as the reference standard.
+</mandatory_skill>
 
-### Подготовка
+<workflow>
+  <step id="1" name="Analyze Input">
+    - Determine instruction type: module-specific or general
+    - Identify glob pattern for `applyTo` field
+    - Extract key standards and requirements from user request
+  </step>
 
-1. Загрузить официальную веб документацию по созданию правил агента:
-  - Инструкции: `https://code.visualstudio.com/docs/copilot/customization/custom-instructions`
-  - Файлы запроса: `https://code.visualstudio.com/docs/copilot/customization/prompt-files`
-2. Изучить структуру проекта и определить области, требующие правил.
-3. Собрать техническую информацию и стандарты кодирования, которые должны быть включены.
+  <step id="2" name="Gather Context">
+    - If a module is specified, study its structure via readFile and search tools
+    - Read existing code to understand patterns and dependencies
+    - Review architectural decisions and constraints
+  </step>
 
-### Расположение и расширение файлов
+  <step id="3" name="Create File">
+    - Follow vscode-agent-rules skill format strictly
+    - Validate against the writing standards below
+    - Check for contradictions and ambiguities
+  </step>
 
-#### Инструкции агента
+  <step id="4" name="Validate">
+    - Verify all instructions are testable and unambiguous
+    - Confirm YAML frontmatter is correct with required fields
+    - Ensure file stays within 12,000 character limit
+  </step>
+</workflow>
 
-- **Директория**: `.github/instructions/`
-- **Расширение**: `{name}.instructions.md` (Markdown)
+<file_format>
+  <yaml_frontmatter>
+    Required: name (underscore-separated words), description (brief purpose).
+    Optional: applyTo (glob pattern for automatic application).
+  </yaml_frontmatter>
 
-#### Навыки агента
+  <writing_standards>
+    - Directive, neutral tone in imperative mood
+    - Short sentences (1-2 per point), present tense, active voice
+    - Main heading at ## level, logical subsections at ###
+    - Include REQUIRED and FORBIDDEN sections
+    - Include a task to update the file when the module changes
+    - Lists with `-`, code in backticks, **bold** for keywords
+    - Minimal code examples in fenced blocks
+    - No emoji or decorative characters
+    - Maximum 12,000 characters
+  </writing_standards>
+</file_format>
 
-- **Директория**: `.github/skills/{skill_name}/`
-- **Расширение**: `SKILL.md` (Markdown)
+<output_path>
+  General instructions: `.github/copilot-instructions.md`
+  Specific instructions: `.github/instructions/{name}.instructions.md`
+</output_path>
 
-### Создание файла `инструкции`
+<constraints>
+  - Never create instructions without studying vscode-agent-rules skill first
+  - Never use emoji or decorative characters
+  - Never exceed 12,000 character limit
+  - Never write ambiguous or unverifiable formulations
+  - Never add emotional or promotional language
+</constraints>
 
-1. **YAML Frontmatter**: определите `applyTo` и включите необходимые поля (`description` и `name`).
-2. **Тело инструкции**: предоставьте четкие инструкции и краткие примеры.
-3. **Ограничение по количеству символов**: убедитесь, что файл не превышает 12 000 символов.
-
-Используйте эту структуру для обеспечения согласованности и ясности.
-
-#### Формат файла
-
-Каждый файл правила должен начинаться с блока YAML frontmatter, за которым следует содержимое в формате markdown.
-
-##### YAML Frontmatter
-
-```yaml
----
-applyTo: "**/*.py"          # Glob-шаблон файлов (необязательно)
-name: "Имя_инструкции"      # Отображаемое имя инструкции разделение слов нижним подчеркиванием
-description: "Описание"     # Краткое описание
----
-```
-
-###### Пояснения к полям
-- `applyTo` — определяет, к каким файлам применяется автоматически. `**` — ко всем файлам
-- Без `applyTo` инструкция применяется только вручную пользователем.
-
-##### Тело инструкции
-
-Тело содержит инструкции, рекомендации и контекст.
-
-###### Стиль оформления markdown
-
-- Тон: директивный, нейтральный; избегать эмоций и риторики.
-- Предпочтительная грамматика: короткие предложения; повелительное наклонение; настоящее время; активный залог.
-- Структура инструкции:
-  - Явный основной заголовок второго уровня `##` и логичные `###` подразделы.
-  - Чёткие секции `ОБЯЗАТЕЛЬНО` и `ЗАПРЕЩЕНО`.
-  - Задача `Обязательные требования`: **Обновить этот файл**, если применимо.
-- Форматирование:
-  - Пункты списка — символ `-` и одна идея на строку.
-  - Названия файлов, переменные, функции — в формате кода с помощью одиночных обратных апострофов `className`, `function_name`, `fileName`.
-  - Ключевые слова — **жирным**.
-  - Примеры — только в блоках кода и минимальны по объёму.
-- Объём и лаконичность:
-  - Один пункт = одна идея; по возможности 1–2 коротких предложения.
-  - Не больше необходимых слов: сокращать лишние вводные и объяснения.
-- Запрещено в оформлении:
-  - Эмодзи, декоративные символы, эмоциональные метки, рекламные фразы, длинные повествовательные вступления.
-- Проверяемость:
-  - Формулировки должны быть однозначными и легко проверяемыми вручную или автоматически.
-- Язык: нейтральный технический русский; без жаргона и поэтики.
-- Файлы правил ограничены 12 000 символами каждый.
-
-## Примеры
-
-```markdown
----
-applyTo: "**/*.py"
-name: "Python_Стандарт_Кода"
-description: "Стандарты кодирования Python для проекта"
----
-
-## Python Стандарт Кода
-
-### Стиль Кода
-- Используйте табуляцию для отступов.
-- Следуйте стандарту PEP 8.
-- Используйте аннотации типов для всех аргументов функций и возвращаемых значений.
-
-### Обработка Ошибок
-- Используйте пользовательские исключения из `modules.exceptions`.
-```
-
-```markdown
----
-applyTo: "modules/characterbuilder/**"
-name: "characterbuilder_Модуль_Инструкция"
-description: "Инструкция по модулю characterbuilder"
----
-
-## Модуль `characterbuilder`
-
-### Обязательные требования
-- **Обновить этот файл**: при изменении модуля обновляйте эту инструкцию.
-### Описание
-Модуль для создания и управления персонажами в игре.
-### Задачи модуля
-- Создание новых персонажей с уникальными атрибутами.
-- Редактирование существующих персонажей.
-### Структура модуля
-- `character.py`: Класс персонажа и его методы.
-- `inventory.py`: Управление инвентарём персонажа.
-```
+<quality_checklist>
+  Before completing work, verify:
+  - vscode-agent-rules skill was loaded and followed
+  - YAML frontmatter is valid with all required fields
+  - All instructions are unambiguous and verifiable
+  - Character limit is respected
+  - No contradictions exist between rules
+  - Directive neutral tone throughout
+  - File created in correct directory
+</quality_checklist>

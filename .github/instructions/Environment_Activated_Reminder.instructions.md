@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+# applyTo: '**'
 name: 'Environment_Activated_Reminder'
 description: 'Правила подготовки терминала перед работой: venv, UTF-8, использование terminal_last_command.'
 ---
