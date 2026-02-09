@@ -167,6 +167,167 @@ const example = (): string => {
 - Use comments to explain
 - Omit boilerplate when possible
 
+## XML-Like Structure
+
+### When to Use XML
+
+Use XML-like tags **sparingly** for complex instructions. Reserve for cases where markdown hierarchy is insufficient.
+
+**Appropriate use cases:**
+- Multi-step workflows with dependencies
+- Complex hierarchical relationships
+- Explicit state management instructions
+- Nested conditional logic
+
+**Inappropriate use cases:**
+- Simple lists (use markdown bullets)
+- Basic code standards (use markdown headings)
+- Short instructions under 1000 characters
+- When markdown structure is clear enough
+
+### XML Structure Patterns
+
+**Workflow with dependencies:**
+
+```xml
+<workflow>
+  <phase id="init">
+    <step>Load configuration</step>
+    <step>Validate parameters</step>
+  </phase>
+  
+  <phase id="process" depends-on="init">
+    <step>Execute main logic</step>
+    <step>Transform results</step>
+  </phase>
+  
+  <phase id="finalize" depends-on="process">
+    <step>Save results</step>
+    <step>Cleanup resources</step>
+  </phase>
+</workflow>
+```
+
+**Grouped constraints:**
+
+```xml
+<constraints>
+  <must_do>
+    <item priority="high">Validate all inputs</item>
+    <item priority="high">Log all errors</item>
+    <item priority="medium">Write tests</item>
+  </must_do>
+  
+  <must_not_do>
+    <item>Skip validation</item>
+    <item>Ignore errors</item>
+    <item>Expose internal details</item>
+  </must_not_do>
+</constraints>
+```
+
+**Conditional rules:**
+
+```xml
+<rules>
+  <condition type="production">
+    <rule>Use environment variables for secrets</rule>
+    <rule>Enable all security features</rule>
+    <rule>Log to remote service</rule>
+  </condition>
+  
+  <condition type="development">
+    <rule>Can use local config files</rule>
+    <rule>Verbose debugging enabled</rule>
+    <rule>Log to console</rule>
+  </condition>
+</rules>
+```
+
+### Hybrid Approach (Recommended)
+
+Combine markdown and XML for optimal clarity:
+
+```markdown
+## Module Guidelines
+
+### Code Style
+- Use type hints
+- Follow PEP 8
+
+<initialization_sequence>
+  <step id="1">Load config from settings.json</step>
+  <step id="2" depends-on="1">Connect to database</step>
+  <step id="3" depends-on="2">Initialize services</step>
+</initialization_sequence>
+
+### Testing Requirements
+- Write unit tests
+- Maintain 80% coverage
+```
+
+### XML Best Practices
+
+**DO:**
+- Use descriptive tag names (`<workflow>`, `<constraints>`)
+- Keep nesting under 3 levels deep
+- Include `id` attributes for reference
+- Use `depends-on` for explicit dependencies
+- Close all tags properly
+
+**DON'T:**
+- Don't use XML for simple lists
+- Don't over-nest (avoid 4+ levels)
+- Don't use single-letter tags (`<a>`, `<x>`)
+- Don't mix multiple XML styles inconsistently
+- Don't wrap entire instructions in one big XML block
+
+### Anti-Patterns
+
+❌ **Excessive XML for simple content:**
+
+```xml
+<instructions>
+  <section name="style">
+    <rule>Use tabs</rule>
+    <rule>Use PEP 8</rule>
+  </section>
+</instructions>
+```
+
+✅ **Better - use markdown:**
+
+```markdown
+### Code Style
+- Use tabs for indentation
+- Follow PEP 8 standard
+```
+
+❌ **Over-nested XML:**
+
+```xml
+<project>
+  <module>
+    <file>
+      <function>
+        <parameter>
+          <validation>Check not null</validation>
+        </parameter>
+      </function>
+    </file>
+  </module>
+</project>
+```
+
+✅ **Better - flatten structure:**
+
+```xml
+<validation_rules>
+  <rule scope="function.parameter">Check not null</rule>
+  <rule scope="function.return">Validate type</rule>
+</validation_rules>
+```
+
 ## Emphasis and Highlighting
 
 ### Bold Text
@@ -525,7 +686,9 @@ Maybe add some error handling.
 Before finalizing instructions or prompts:
 
 **Content:**
-- [ ] Under character limit (12,000 for instructions)
+- [ ] Under character limit:
+  - Simple instructions: 3,000 characters max
+  - Complex instructions: 12,000 characters max
 - [ ] Directive, neutral tone throughout
 - [ ] No emojis or decorative symbols
 - [ ] One idea per bullet point
